@@ -1,0 +1,6 @@
+{
+  "posts": [
+    { "id": 1, "name": "Vitor Ribeiro", "adress": "Rua José Melaré" },
+    { "id": 2, "name": "Lucas Módolo", "adress": "Rua Arlindo Cruz" }
+  ]
+}

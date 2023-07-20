@@ -1,8 +1,9 @@
 'use client'
 import { ClientItem } from "@/components/ClientItem"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import clsx from 'clsx';
 import { SelectClientType } from "@/components/SelectClientType";
+import axios from "axios";
 
 interface ClientsObject {
   id: number
@@ -40,7 +41,20 @@ const [clients, setClients] = useState([
     setClientType('Pessoa Jurídica')
   }
 
-    console.log(clientType)
+  async function fetchClients() {
+    try {
+      const response = await axios.get('http://localhost:3001/posts')
+      const clients = response.data
+      console.log(clients)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchClients()
+  },[])
+
   return (
     <main className="w-screen h-screen flex flex-row">
       <aside className="w-1/3 h-screen border border-black overflow-y-scroll flex flex-col items-center px-8 py-4">
