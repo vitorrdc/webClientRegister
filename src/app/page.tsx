@@ -1,5 +1,8 @@
 'use client'
+import { ClientItem } from "@/components/ClientItem"
 import { useState } from "react"
+import clsx from 'clsx';
+import { SelectClientType } from "@/components/SelectClientType";
 
 interface ClientsObject {
   id: number
@@ -10,6 +13,7 @@ interface ClientsObject {
 
 export default function Home() {
 
+const [clientType, setClientType] = useState<string>('Pessoa Física')
 const [clients, setClients] = useState([
   {
     id: 1,
@@ -28,24 +32,44 @@ const [clients, setClients] = useState([
   },
 ] as ClientsObject[])  
 
+  function handlePhysicalClient() {
+    setClientType('Pessoa Física')
+  }
 
+  function handleLegalClient() {
+    setClientType('Pessoa Jurídica')
+  }
+
+    console.log(clientType)
   return (
-    <main className="w-screen h-screen flex-row">
+    <main className="w-screen h-screen flex flex-row">
       <aside className="w-1/3 h-screen border border-black overflow-y-scroll flex flex-col items-center px-8 py-4">
         <div className="font-semibold text-2xl text-cyan-600 mb-8">Meus Clientes</div>   
         <div className="w-full h-64">
           {
             clients.map((element) => {
               return (
-                <div className="grid grid-cols-2 w-full rounded-md p-2 mb-2 border shadow-sm shadow-cyan-200 border-cyan-600">
-                  <button className="text-gray-700 font-semibold text-base">{element.name}</button>
-                  <button className="text-gray-700 font-medium text-sm">{element.adress}</button>
-                </div>
+                <ClientItem name={element.name} adress={element.adress} />
               )
             })
           }
         </div>
       </aside>
+      <div className="flex flex-col items-center p-4 w-2/3">
+        <div className="font-semibold text-2xl text-cyan-600 mb-8">Cadastrar Novo Cliente</div>
+        <div className="flex flex-row justify-between">
+          <SelectClientType 
+            classStyle={clsx("w-36 py-2 text-center mr-4 text-gray-700", {"border-b-2 border-cyan-600 font-bold": clientType === 'Pessoa Física'})}
+            text="Pessoa Física"
+            onClick={handlePhysicalClient}
+          />
+           <SelectClientType 
+            classStyle={clsx("w-36 py-2 text-center mr-4 text-gray-700", {"border-b-2 border-cyan-600 font-bold": clientType === 'Pessoa Jurídica'})}
+            text="Pessoa Jurídica"
+            onClick={handleLegalClient}
+          />
+        </div>
+      </div>
     </main>
   )
 }
