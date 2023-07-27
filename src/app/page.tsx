@@ -7,6 +7,7 @@ import axios from "axios";
 import {useForm} from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import InputMask from 'react-input-mask';
 
 interface ClientsObject {
   id: number
@@ -24,8 +25,14 @@ const registerNewClientFormSchema = z.object({
       }).join(' ')
     }),
   rg: z.string()
-    .nonempty('O RG é obrigatório')
-    .regex(/^\d{8,9}$/),  
+    .nonempty('Digite um RG válido')
+    .refine((val) => /^\d{2}\.\d{3}\.\d{3}-\d{1}$/.test(val), {
+      message: 'RG inválido. Use o formato xx.xxx.xxx-x',}), 
+  cpf: z.string()
+    .nonempty('Digite um CPF válido')
+    .refine((val) => /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(val), {
+      message: 'CPF inválido. Use o formato xxx.xxx.xxx-xx'
+    }),    
   email: z.string()
     .nonempty('O E-mail é obrigatório ')
     .email('Formato de e-mail inválido')
@@ -126,32 +133,43 @@ const [clients, setClients] = useState([
           >
             <div className="flex flex-row items-center justify-around gap-1 w-full">
               <div className="flex flex-col justify-center w-full mr-4">
-                <label htmlFor="name" className="text-gray-600 text-sm ml-2">Nome</label>
+                <label htmlFor="name" className="text-gray-600 text-sm font-semibold ml-2">Nome</label>
                 <input 
                   type="text" 
-                  className=" w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
+                  className=" w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm focus:border-cyan-700"
                   {...register('name')}  
                 />
                 {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
               </div>
-              <div className="flex flex-col justify-center w-full mr-4">
-                <label htmlFor="rg" className="text-gray-600 text-sm ml-2">RG</label>
-                <input 
-                  type="text" 
+              <div className="flex flex-col justify-center w-1/2 mr-4">
+                <label htmlFor="rg" className="text-gray-600 text-sm font-semibold ml-2">RG</label>
+                <InputMask
+                  mask='99.999.999-9'
                   className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
                   {...register('rg')}  
                 />
                 {errors.rg && <span className="text-red-500 text-xs">{errors.rg.message}</span>}
               </div>
+              <div className="flex flex-col justify-center w-1/2 mr-4">
+                <label htmlFor="cpf" className="text-gray-600 text-sm font-semibold ml-2">CPF</label>
+                <InputMask
+                  mask='999.999.999-99'
+                  className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
+                  {...register('cpf')}  
+                />
+                {errors.cpf && <span className="text-red-500 text-xs">{errors.cpf.message}</span>}
+              </div>
             </div>
-            <div className="flex flex-col gap-1">
-              <label htmlFor="email" className="text-zinc-700 text-sm ml-2">E-mail</label>
-              <input 
-                type="text" 
-                className=" border border-gray-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
-                {...register('email')} 
-              />
-              {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+            <div className="w-full flex flex-row justify-start items-center">
+              <div className="flex flex-col gap-1 w-full">
+                <label htmlFor="email" className="text-zinc-700 text-sm font-semibold ml-2">E-mail</label>
+                <input 
+                  type="text" 
+                  className=" w-1/3 border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                  {...register('email')} 
+                />
+                {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+              </div>
             </div>
             <button 
               type="submit"
