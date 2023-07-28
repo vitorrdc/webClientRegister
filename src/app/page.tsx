@@ -36,7 +36,41 @@ const registerNewClientFormSchema = z.object({
   email: z.string()
     .nonempty('O E-mail é obrigatório ')
     .email('Formato de e-mail inválido')
-    .toLowerCase()
+    .toLowerCase(),
+  cep: z.string()
+    .nonempty('O CEP é obrigatório')
+    .refine((val) => /^\d{5}\-\d{3}$/.test(val), {
+      message: 'Use o formato xxxxx-xxx'
+    }),
+  bairro: z.string()
+    .nonempty('O Bairro é obrigatório'),
+  rua: z.string()
+    .nonempty('A Rua é obrigatório')
+    .transform(adress => {
+      return adress.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1))
+      }).join(' ')
+    }),
+  number: z.string()
+    .nonempty('Obrigatório')
+    .refine(value => /^\d+$/.test(value), 'Número'),
+  city: z.string()
+    .nonempty('a Cidade é obrigatória')
+    .transform(adress => {
+      return adress.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1))
+      }).join(' ')
+    }),
+  state: z.string()
+    .nonempty('Obrigatório')
+    .toUpperCase(),
+  country: z.string()
+    .nonempty('O País é obrigatório')
+    .transform(name => {
+      return name.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1))
+      }).join(' ')
+    })
 })
 
 type CreateClientFormData = z.infer<typeof registerNewClientFormSchema >
@@ -161,14 +195,79 @@ const [clients, setClients] = useState([
               </div>
             </div>
             <div className="w-full flex flex-row justify-start items-center">
-              <div className="flex flex-col gap-1 w-full">
+              <div className="flex flex-col w-1/2 mr-4">
                 <label htmlFor="email" className="text-zinc-700 text-sm font-semibold ml-2">E-mail</label>
                 <input 
                   type="text" 
-                  className=" w-1/3 border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                  className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('email')} 
                 />
                 {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+              </div>
+              <div className="flex flex-col w-1/6  mr-4">
+                <label htmlFor="cep" className="text-zinc-700 text-sm font-semibold ml-2">CEP</label>
+                <InputMask 
+                  mask='99999-999' 
+                  className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                  {...register('cep')} 
+                />
+                {errors.cep && <span className="text-red-500 text-xs">{errors.cep.message}</span>}
+              </div>
+              <div className="flex flex-col mr-4 w-1/3">
+                <label htmlFor="bairro" className="text-zinc-700 text-sm font-semibold ml-2">Bairro</label>
+                <input 
+                  type="text" 
+                  className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                  {...register('bairro')} 
+                />
+                {errors.bairro && <span className="text-red-500 text-xs">{errors.bairro.message}</span>}
+              </div>
+            </div>
+            <div className="w-full flex flex-row justify-start items-center">
+              <div className="flex flex-col w-1/3 mr-4">
+                <label htmlFor="rua" className="text-zinc-700 text-sm font-semibold ml-2">Rua</label>
+                <input 
+                  type="text" 
+                  className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    {...register('rua')} 
+                />
+                  {errors.rua && <span className="text-red-500 text-xs">{errors.rua.message}</span>}
+              </div>
+              <div className="flex flex-col mr-4 w-[5%]">
+                <label htmlFor="number" className="text-zinc-700 text-sm font-semibold ml-2">nº</label>
+                <input 
+                  type="text" 
+                  className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    {...register('number')} 
+                />
+                  {errors.number && <span className="text-red-500 text-xs">{errors.number.message}</span>}
+              </div>
+              <div className="flex flex-col mr-4 w-1/4">
+                <label htmlFor="city" className="text-zinc-700 text-sm font-semibold ml-2">Cidade</label>
+                <input 
+                  type="text" 
+                  className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    {...register('city')} 
+                />
+                  {errors.city && <span className="text-red-500 text-xs">{errors.city.message}</span>}
+              </div>
+              <div className="flex flex-col mr-4 w-[5%]">
+                <label htmlFor="state" className="text-zinc-700 text-sm font-semibold ml-2">UF</label>
+                <input 
+                  type="text" 
+                  className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    {...register('state')} 
+                />
+                  {errors.state && <span className="text-red-500 text-xs">{errors.state.message}</span>}
+              </div>
+              <div className="flex flex-col mr-4 w-1/4">
+                <label htmlFor="country" className="text-zinc-700 text-sm font-semibold ml-2">País</label>
+                <input 
+                  type="text" 
+                  className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    {...register('country')} 
+                />
+                  {errors.country && <span className="text-red-500 text-xs">{errors.country.message}</span>}
               </div>
             </div>
             <button 
