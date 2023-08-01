@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputMask from 'react-input-mask';
 import { InputAvatar } from "@/components/InputAvatar";
+import Image from 'next/image'
 
 
 interface ClientsObject {
@@ -275,11 +276,19 @@ const handleImageSelected = (file) => {
                   {errors.country && <span className="text-red-500 text-xs">{errors.country.message}</span>}
               </div>
             </div>
-            <div className="bg-blue-300 flex justify-center cursor-pointer">
-              <InputAvatar onFileSelected={handleImageSelected}/> 
-              {selectedImage && (
-                <img src={URL.createObjectURL(selectedImage)} alt="Image Selected" />
-              )}
+            <div className="flex flex-col justify-center items-center cursor-pointer rounded-xl"> 
+                {
+                  selectedImage ? (
+                    <img 
+                  src={selectedImage && URL.createObjectURL(selectedImage)} 
+                  alt="Image Selected"
+                  className="w-32 h-32 rounded-full text-cyan-200 bg-cyan-200 mt-2" 
+                />               
+                  ) : (
+                    <Image src='/image/user.png' alt="ASDASDSA" width={100} height={100} className="mt-4" />
+                  )
+                }
+                 <InputAvatar onFileSelected={handleImageSelected}/>
             </div>
             <button 
               type="submit"

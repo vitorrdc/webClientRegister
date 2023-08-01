@@ -10,9 +10,9 @@ export function InputAvatar({onFileSelected}) {
   })
 
   return (
-    <div {...getRootProps()} className='dropzone'>
+    <div {...getRootProps()} className='dropzone bg-blue-400 p-2 rounded-lg mt-2'>
       <input {...getInputProps()} />
-      <p>Arraste e solte uma imagem aqui, ou clique para selecionar</p>
+      <p className='text-gray-700'>Clique para selecionar uma imagem de Avatar ou arraste uma até aqui.</p>
     </div>
    
   )
