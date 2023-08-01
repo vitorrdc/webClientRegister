@@ -8,6 +8,8 @@ import {useForm} from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputMask from 'react-input-mask';
+import { InputAvatar } from "@/components/InputAvatar";
+
 
 interface ClientsObject {
   id: number
@@ -27,11 +29,11 @@ const registerNewClientFormSchema = z.object({
   rg: z.string()
     .nonempty('Digite um RG válido')
     .refine((val) => /^\d{2}\.\d{3}\.\d{3}-\d{1}$/.test(val), {
-      message: 'RG inválido. Use o formato xx.xxx.xxx-x',}), 
+      message: 'Use o formato xx.xxx.xxx-x',}), 
   cpf: z.string()
     .nonempty('Digite um CPF válido')
     .refine((val) => /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(val), {
-      message: 'CPF inválido. Use o formato xxx.xxx.xxx-xx'
+      message: 'Use o formato xxx.xxx.xxx-xx'
     }),    
   email: z.string()
     .nonempty('O E-mail é obrigatório ')
@@ -70,7 +72,7 @@ const registerNewClientFormSchema = z.object({
       return name.trim().split(' ').map(word => {
         return word[0].toLocaleUpperCase().concat(word.substring(1))
       }).join(' ')
-    })
+    }),
 })
 
 type CreateClientFormData = z.infer<typeof registerNewClientFormSchema >
@@ -84,8 +86,6 @@ const {
   } = useForm<CreateClientFormData>({
   resolver: zodResolver(registerNewClientFormSchema)
 })
-
-console.log(errors)
 
 const [outPut, setOutPut] = useState<any>('')
 const [clientType, setClientType] = useState<string>('Pessoa Física')
@@ -105,7 +105,12 @@ const [clients, setClients] = useState([
     name: 'Lucas Módolo',
     adress: 'Rua Oscar Freire'
   },
-] as ClientsObject[])  
+] as ClientsObject[])   
+const [selectedImage, setSelectedImage] = useState(null);
+
+const handleImageSelected = (file) => {
+  setSelectedImage(file);
+};
 
   function handlePhysicalClient() {
     setClientType('Pessoa Física')
@@ -170,7 +175,7 @@ const [clients, setClients] = useState([
                 <label htmlFor="name" className="text-gray-600 text-sm font-semibold ml-2">Nome</label>
                 <input 
                   type="text" 
-                  className=" w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm focus:border-cyan-700"
+                  className={clsx("w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm", {"border-red-500 border": errors.name})}
                   {...register('name')}  
                 />
                 {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
@@ -269,6 +274,12 @@ const [clients, setClients] = useState([
                 />
                   {errors.country && <span className="text-red-500 text-xs">{errors.country.message}</span>}
               </div>
+            </div>
+            <div className="bg-blue-300 flex justify-center cursor-pointer">
+              <InputAvatar onFileSelected={handleImageSelected}/> 
+              {selectedImage && (
+                <img src={URL.createObjectURL(selectedImage)} alt="Image Selected" />
+              )}
             </div>
             <button 
               type="submit"
