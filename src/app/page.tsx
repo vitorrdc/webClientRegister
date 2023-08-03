@@ -108,9 +108,11 @@ const [clients, setClients] = useState([
   },
 ] as ClientsObject[])   
 const [selectedImage, setSelectedImage] = useState(null);
+const [completedRegister, setCompletedRegister] = useState<any>('')
 
 const handleImageSelected = (file) => {
   setSelectedImage(file);
+  const image = URL.createObjectURL(file)
 };
 
   function handlePhysicalClient() {
@@ -137,7 +139,19 @@ const handleImageSelected = (file) => {
 
   function handleFormData(data: any) {
     setOutPut(JSON.stringify(data, null, 2))
+    if (selectedImage) {
+       const newObj = {
+      image: URL.createObjectURL(selectedImage)
+      }
+      const newObjWithImage = {
+        ...JSON.parse(outPut),
+        ...newObj
+      }
+      setCompletedRegister(newObjWithImage)
+    }
+   console.log(completedRegister)
   }
+  
 
   return (
     <main className="w-screen h-screen flex flex-row">
@@ -282,7 +296,7 @@ const handleImageSelected = (file) => {
                     <img 
                   src={selectedImage && URL.createObjectURL(selectedImage)} 
                   alt="Image Selected"
-                  className="w-32 h-32 rounded-full text-cyan-200 bg-cyan-200 mt-2" 
+                  className="w-32 h-32 object-cover rounded-full text-cyan-200 bg-cyan-200 mt-2 bg-contain" 
                 />               
                   ) : (
                     <Image src='/image/user.png' alt="ASDASDSA" width={100} height={100} className="mt-4" />
