@@ -1,6 +1,6 @@
 'use client'
 import { ClientItem } from "@/components/ClientItem"
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import clsx from 'clsx';
 import { SelectClientType } from "@/components/SelectClientType";
 import axios from "axios";
@@ -89,49 +89,26 @@ const {
 })
 
 const [outPut, setOutPut] = useState<any>('')
-const [clientType, setClientType] = useState<string>('Pessoa Física')
-const [clients, setClients] = useState([
-  {
-    id: 1,
-    name: 'Vitor Ribeiro',
-    adress: 'Rua José Melaré'
-  },
-  {
-    id: 2,
-    name: 'José Fernando',
-    adress: 'Rua Martins de Sá'
-  },
-  {
-    id: 3,
-    name: 'Lucas Módolo',
-    adress: 'Rua Oscar Freire'
-  },
-] as ClientsObject[])   
 const [selectedImage, setSelectedImage] = useState(null);
-const [completedRegister, setCompletedRegister] = useState<any>('')
+const [clientData, setClientData] = useState<any>('')
 
 const handleImageSelected = (file) => {
   setSelectedImage(file);
   const image = URL.createObjectURL(file)
 };
 
-  function handlePhysicalClient() {
-    setClientType('Pessoa Física')
-  }
-
-  function handleLegalClient() {
-    setClientType('Pessoa Jurídica')
-  }
+  console.log(selectedImage)
 
   async function fetchClients() {
     try {
       const response = await axios.get('http://localhost:3001/posts')
       const clients = response.data
-      console.log(clients)
+      setClientData(clients)
     } catch (error) {
       console.log(error)
     }
   }
+  console.log(clientData)
 
   useEffect(() => {
     fetchClients()
@@ -139,17 +116,6 @@ const handleImageSelected = (file) => {
 
   function handleFormData(data: any) {
     setOutPut(JSON.stringify(data, null, 2))
-    if (selectedImage) {
-       const newObj = {
-      image: URL.createObjectURL(selectedImage)
-      }
-      const newObjWithImage = {
-        ...JSON.parse(outPut),
-        ...newObj
-      }
-      setCompletedRegister(newObjWithImage)
-    }
-   console.log(completedRegister)
   }
   
 
@@ -159,7 +125,7 @@ const handleImageSelected = (file) => {
         <div className="font-semibold text-2xl text-gray-600 mb-8">Meus Clientes</div>   
         <div className="w-full h-64">
           {
-            clients.map((element) => {
+            clientData.map((element) => {
               return (
                 <ClientItem name={element.name} adress={element.adress} />
               )
@@ -169,18 +135,6 @@ const handleImageSelected = (file) => {
       </aside>
       <div className="flex flex-col items-center p-4 w-2/3">
         <div className="font-semibold text-2xl text-gray-600 mb-8">Cadastrar Novo Cliente</div>
-        <div className="flex flex-row justify-between">
-          <SelectClientType 
-            classStyle={clsx("w-36 py-2 text-center mr-4 text-gray-700", {"border-b-2 border-cyan-600 font-bold": clientType === 'Pessoa Física'})}
-            text="Pessoa Física"
-            onClick={handlePhysicalClient}
-          />
-           <SelectClientType 
-            classStyle={clsx("w-36 py-2 text-center mr-4 text-gray-700", {"border-b-2 border-cyan-600 font-bold": clientType === 'Pessoa Jurídica'})}
-            text="Pessoa Jurídica"
-            onClick={handleLegalClient}
-          />
-        </div>
           <form 
             className="flex flex-col gap-4 mt-12 w-full"
             onSubmit={handleSubmit(handleFormData)}
