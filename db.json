@@ -1,6 +1,56 @@
 {
   "posts": [
-    { "id": 1, "name": "Vitor Ribeiro", "adress": "Rua José Melaré" },
-    { "id": 2, "name": "Lucas Módolo", "adress": "Rua Arlindo Cruz" }
+    {
+      "id": 1,
+      "name": "Vitor Ribeiro",
+      "adress": "Rua José Melaré"
+    },
+    {
+      "id": 2,
+      "name": "Lucas Módolo",
+      "adress": "Rua Arlindo Cruz"
+    },
+    {
+      "name": "Vitor Ribeiro",
+      "rg": "45.646.546-5",
+      "cpf": "654.654.654-65",
+      "email": "vitor.camposrdc@gmail.com",
+      "cep": "65465-456",
+      "bairro": "Jardim das Palmeiras",
+      "rua": "José Melaré",
+      "number": "56",
+      "city": "Boituva",
+      "state": "SP",
+      "country": "Brasil",
+      "id": 3
+    },
+    {
+      "name": "Vitor Ribeiro",
+      "rg": "45.646.546-5",
+      "cpf": "654.654.654-65",
+      "email": "vitor.camposrdc@gmail.com",
+      "cep": "65465-456",
+      "bairro": "Jardim das Palmeiras",
+      "rua": "José Melaré",
+      "number": "56",
+      "city": "Boituva",
+      "state": "SP",
+      "country": "Brasil",
+      "id": 4
+    },
+    {
+      "name": "Vitor Ribeiro Dasdasdasdasd",
+      "rg": "45.646.546-5",
+      "cpf": "654.654.654-65",
+      "email": "vitor.camposrdc@gmail.com",
+      "cep": "65465-456",
+      "bairro": "Jardim das Palmeiras",
+      "rua": "José Melaré",
+      "number": "56",
+      "city": "Boituva",
+      "state": "SP",
+      "country": "Brasil",
+      "id": 5
+    }
   ]
 }

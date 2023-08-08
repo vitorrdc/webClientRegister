@@ -15,7 +15,17 @@ import Image from 'next/image'
 interface ClientsObject {
   id: number
   name: string
-  adress: string
+  rg: string
+  cpf: string
+  email: string
+  cep: string
+  bairro: string
+  rua: string
+  number: string
+  city: string
+  country: string
+  state: string
+  avatar_url: any
 }
 
 const registerNewClientFormSchema = z.object({
@@ -91,6 +101,7 @@ const {
 const [outPut, setOutPut] = useState<any>('')
 const [selectedImage, setSelectedImage] = useState(null);
 const [clientData, setClientData] = useState<any>('')
+const [clientTest, setClientTest] = useState<any>('')
 
 const handleImageSelected = (file) => {
   setSelectedImage(file);
@@ -108,14 +119,31 @@ const handleImageSelected = (file) => {
       console.log(error)
     }
   }
-  console.log(clientData)
-
+  
   useEffect(() => {
     fetchClients()
   },[])
 
-  function handleFormData(data: any) {
-    setOutPut(JSON.stringify(data, null, 2))
+  async function sendNewClient() {
+    try {
+      const response = await axios.post('http://localhost:3001/posts', outPut )
+      const newClient = response.data
+      console.log(newClient)
+    } catch (error) {
+      console.log(error)
+      
+    }
+  }
+
+  async function handleFormData(data: any) {
+   const form = data
+   try {
+    const response = await axios.post('http://localhost:3001/posts', form )
+    const newClient = response.data
+    console.log(newClient)
+  } catch (error) {
+    console.log(error)
+   } 
   }
   
 
@@ -124,13 +152,13 @@ const handleImageSelected = (file) => {
       <aside className="w-1/3 h-screen border border-black overflow-y-scroll flex flex-col items-center px-2 py-4">
         <div className="font-semibold text-2xl text-gray-600 mb-8">Meus Clientes</div>   
         <div className="w-full h-64">
-          {
+          {/* {
             clientData.map((element) => {
               return (
                 <ClientItem name={element.name} adress={element.adress} />
               )
             })
-          }
+          } */}
         </div>
       </aside>
       <div className="flex flex-col items-center p-4 w-2/3">
