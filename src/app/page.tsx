@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import InputMask from 'react-input-mask';
 import { InputAvatar } from "@/components/InputAvatar";
 import Image from 'next/image'
+import { EmpityClientList } from "@/components/EmpityClientList";
 
 
 interface ClientsObject {
@@ -25,7 +26,6 @@ interface ClientsObject {
   city: string
   country: string
   state: string
-  avatar_url: any
 }
 
 const registerNewClientFormSchema = z.object({
@@ -101,14 +101,15 @@ const {
 const [outPut, setOutPut] = useState<any>('')
 const [selectedImage, setSelectedImage] = useState(null);
 const [clientData, setClientData] = useState<any>('')
-const [clientTest, setClientTest] = useState<any>('')
+
 
 const handleImageSelected = (file) => {
   setSelectedImage(file);
   const image = URL.createObjectURL(file)
 };
 
-  console.log(selectedImage)
+  // console.log(selectedImage)
+  console.log(clientData)
 
   async function fetchClients() {
     try {
@@ -119,21 +120,20 @@ const handleImageSelected = (file) => {
       console.log(error)
     }
   }
+
+  async function handleDeleteClient(id: number) {
+    try {
+      axios.delete(`http://localhost:3001/posts/${id}`)
+      const updateClientList = clientData.filter(client => client.id !== id)
+      setClientData(updateClientList)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   useEffect(() => {
     fetchClients()
-  },[])
-
-  async function sendNewClient() {
-    try {
-      const response = await axios.post('http://localhost:3001/posts', outPut )
-      const newClient = response.data
-      console.log(newClient)
-    } catch (error) {
-      console.log(error)
-      
-    }
-  }
+  },[clientData])
 
   async function handleFormData(data: any) {
    const form = data
@@ -152,13 +152,16 @@ const handleImageSelected = (file) => {
       <aside className="w-1/3 h-screen border border-black overflow-y-scroll flex flex-col items-center px-2 py-4">
         <div className="font-semibold text-2xl text-gray-600 mb-8">Meus Clientes</div>   
         <div className="w-full h-64">
-          {/* {
-            clientData.map((element) => {
+          {
+           clientData && clientData.map((element) => {
               return (
-                <ClientItem name={element.name} adress={element.adress} />
+                <ClientItem key={element.id} name={element.name} adress={element.rua} onClick={() => handleDeleteClient(element.id)} />
               )
             })
-          } */}
+          }
+          {
+            clientData.length === 0 && <EmpityClientList />
+          }
         </div>
       </aside>
       <div className="flex flex-col items-center p-4 w-2/3">
@@ -200,7 +203,7 @@ const handleImageSelected = (file) => {
               <div className="flex flex-col w-1/2 mr-4">
                 <label htmlFor="email" className="text-zinc-700 text-sm font-semibold ml-2">E-mail</label>
                 <input 
-                  type="text" 
+                  type="text"  
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('email')} 
                 />
