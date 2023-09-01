@@ -26,35 +26,7 @@
       "city": "Boituva",
       "state": "SP",
       "country": "Brasil",
-      "id": 2
-    },
-    {
-      "name": "Lucas Módolo",
-      "rg": "65.465.456-4",
-      "cpf": "654.654.654-65",
-      "email": "vitor.camposrdc@gmail.com",
-      "cep": "65465-465",
-      "bairro": "Jardim das Palmeiras",
-      "rua": "José Melaré",
-      "number": "56",
-      "city": "Boituva",
-      "state": "SP",
-      "country": "Brasil",
       "id": 3
-    },
-    {
-      "name": "Sadasdasd",
-      "rg": "65.464.654-6",
-      "cpf": "654.654.654-65",
-      "email": "vitor.camposrdc@gmail.com",
-      "cep": "65465-465",
-      "bairro": "Jardim das Palmeiras",
-      "rua": "José Melaré",
-      "number": "56",
-      "city": "Boituva",
-      "state": "SP",
-      "country": "Brasil",
-      "id": 4
     },
     {
       "name": "Vitor Ribeiro",
@@ -71,34 +43,6 @@
       "id": 5
     },
     {
-      "name": "Vitor Ribeiro",
-      "rg": "34.654.654-6",
-      "cpf": "654.654.654-65",
-      "email": "vitor.camposrdc@gmail.com",
-      "cep": "65465-465",
-      "bairro": "Jardim das Palmeiras",
-      "rua": "José Melaré",
-      "number": "56",
-      "city": "Boituva",
-      "state": "SP",
-      "country": "Brasil",
-      "id": 6
-    },
-    {
-      "name": "Vitor Ribeiro",
-      "rg": "64.654.654-6",
-      "cpf": "654.654.654-65",
-      "email": "vitor.camposrdc@gmail.com",
-      "cep": "65465-456",
-      "bairro": "Jardim das Palmeiras",
-      "rua": "José Melaré",
-      "number": "56",
-      "city": "Boituva",
-      "state": "SP",
-      "country": "Brasil",
-      "id": 7
-    },
-    {
       "name": "Ajsdkljaskldj",
       "rg": "65.465.456-4",
       "cpf": "654.654.654-65",
@@ -111,6 +55,34 @@
       "state": "SP",
       "country": "Brasil",
       "id": 8
+    },
+    {
+      "name": "Asdasdasd",
+      "rg": "46.546.546-5",
+      "cpf": "646.465.465-46",
+      "email": "vitor.camposrdc@gmail.com",
+      "cep": "65465-465",
+      "bairro": "Jardim das Palmeiras",
+      "rua": "José Melaré",
+      "number": "56",
+      "city": "Boituva",
+      "state": "SP",
+      "country": "Brasil",
+      "id": 9
+    },
+    {
+      "name": "Camargo",
+      "rg": "65.465.465-4",
+      "cpf": "654.654.654-65",
+      "email": "vitor.camposrdc@gmail.com",
+      "cep": "65465-465",
+      "bairro": "Jardim das Palmeiras",
+      "rua": "José Melaré",
+      "number": "56",
+      "city": "Boituva",
+      "state": "SP",
+      "country": "Brasil",
+      "id": 10
     }
   ]
 }

@@ -8,6 +8,7 @@ import { EmpityClientList } from "@/components/EmpityClientList";
 import { CreateClientFormData, Form, registerNewClientFormSchema } from "@/components/Form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ClientInfo } from "@/components/ClientInfo";
 
 interface ClientsObject {
   id: number
@@ -29,6 +30,7 @@ export default function Home() {
 const [selectedImage, setSelectedImage] = useState(null);
 const [clientData, setClientData] = useState<any>('')
 const [newClientList, setNewClientList] = useState<ClientsObject>('')
+const [clientInfo, setClientInfo] = useState<any>('')
 
 const { reset } = useForm<CreateClientFormData>({
   resolver: zodResolver(registerNewClientFormSchema)
@@ -60,7 +62,27 @@ const { reset } = useForm<CreateClientFormData>({
     console.log(error)
    } 
   }
+
+  async function handleDeleteClient(id) {
+    try {
+      const response = await axios.delete(`http://localhost:3001/posts/${id}`)
+      const updateList = clientData.filter((element) => element.id !== id)
+      setClientData(updateList)
+    } catch (error) {
+      window.alert(error)
+    }
+  }
   
+  async function handleClientInfo(id) {
+    try {
+      const response = await axios.get(`http://localhost:3001/posts/${id}`)
+      setClientInfo(response.data)
+    } catch (error) {
+      window.alert(error)
+    }
+  } 
+
+  console.log(clientInfo)
 
   return (
     <main className="w-screen h-screen flex flex-row">
@@ -70,7 +92,7 @@ const { reset } = useForm<CreateClientFormData>({
           {
            clientData && clientData.map((element) => {
               return (
-                <ClientItem key={element.id} name={element.name} adress={element.rua} onClick={() => handleDeleteClient(element.id)} />
+                <ClientItem key={element.id} name={element.name} adress={element.rua} onClick={() => handleDeleteClient(element.id)} onClickInfo={() => handleClientInfo(element.id)} />
               )
             })
           }
@@ -79,9 +101,10 @@ const { reset } = useForm<CreateClientFormData>({
           }
         </div>
       </aside>
-      <div className="flex flex-col items-center p-4 w-2/">
-        <div className="font-semibold text-2xl text-gray-600 mb-8">Cadastrar Novo Cliente</div>
-        <Form onSubmit={handleFormData} />           
+      <div className="flex flex-col items-center p-4 w-2/3">
+        {/* <div className="font-semibold text-2xl text-gray-600 mb-8">Cadastrar Novo Cliente</div> */}
+        {/* <Form onSubmit={handleFormData} />            */}
+        <ClientInfo data={clientInfo} /> 
       </div>
     </main>
   )
