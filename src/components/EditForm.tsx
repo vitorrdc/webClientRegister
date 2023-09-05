@@ -64,7 +64,7 @@ export const registerNewClientFormSchema = z.object({
 
 export type CreateClientFormData = z.infer<typeof registerNewClientFormSchema >
 
-export function Form({onSubmit}) {
+export function EditForm({onSubmit, clientData, setClientData}) {
 
   const { 
     register, 
@@ -86,7 +86,9 @@ export function Form({onSubmit}) {
                 <input 
                   type="text" 
                   className={clsx("w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm", {"border-red-500 border": errors.name})}
-                  {...register('name')}  
+                  {...register('name')}
+                  value={clientData.name}
+                  // onChange={(e) => setClientData({ ...clientData, name: e.target.value })}  
                 />
                 {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
               </div>
@@ -96,6 +98,7 @@ export function Form({onSubmit}) {
                   mask='99.999.999-9'
                   className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
                   {...register('rg')}  
+                  value={clientData.rg}
                 />
                 {errors.rg && <span className="text-red-500 text-xs">{errors.rg.message}</span>}
               </div>
@@ -105,6 +108,7 @@ export function Form({onSubmit}) {
                   mask='999.999.999-99'
                   className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
                   {...register('cpf')}  
+                  value={clientData.cpf}
                 />
                 {errors.cpf && <span className="text-red-500 text-xs">{errors.cpf.message}</span>}
               </div>
@@ -116,6 +120,7 @@ export function Form({onSubmit}) {
                   type="text"  
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('email')} 
+                  value={clientData.email}
                 />
                 {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
               </div>
@@ -125,6 +130,7 @@ export function Form({onSubmit}) {
                   mask='99999-999' 
                   className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('cep')} 
+                  value={clientData.cep}
                 />
                 {errors.cep && <span className="text-red-500 text-xs">{errors.cep.message}</span>}
               </div>
@@ -134,6 +140,7 @@ export function Form({onSubmit}) {
                   type="text" 
                   className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('bairro')} 
+                  value={clientData.bairro}
                 />
                 {errors.bairro && <span className="text-red-500 text-xs">{errors.bairro.message}</span>}
               </div>
@@ -145,6 +152,7 @@ export function Form({onSubmit}) {
                   type="text" 
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('rua')} 
+                    value={clientData.rua}
                 />
                   {errors.rua && <span className="text-red-500 text-xs">{errors.rua.message}</span>}
               </div>
@@ -154,6 +162,7 @@ export function Form({onSubmit}) {
                   type="text" 
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('number')} 
+                    value={clientData.number}
                 />
                   {errors.number && <span className="text-red-500 text-xs">{errors.number.message}</span>}
               </div>
@@ -163,6 +172,7 @@ export function Form({onSubmit}) {
                   type="text" 
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('city')} 
+                    value={clientData.city}
                 />
                   {errors.city && <span className="text-red-500 text-xs">{errors.city.message}</span>}
               </div>
@@ -172,6 +182,7 @@ export function Form({onSubmit}) {
                   type="text" 
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('state')} 
+                    value={clientData.state}
                 />
                   {errors.state && <span className="text-red-500 text-xs">{errors.state.message}</span>}
               </div>
@@ -181,6 +192,7 @@ export function Form({onSubmit}) {
                   type="text" 
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('country')} 
+                    value={clientData.country}
                 />
                   {errors.country && <span className="text-red-500 text-xs">{errors.country.message}</span>}
               </div>

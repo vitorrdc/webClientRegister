@@ -6,9 +6,10 @@ import axios from "axios";
 import { InputAvatar } from "@/components/InputAvatar";
 import { EmpityClientList } from "@/components/EmpityClientList";
 import { CreateClientFormData, Form, registerNewClientFormSchema } from "@/components/Form";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ClientInfo } from "@/components/ClientInfo";
+import { EditForm } from "@/components/EditForm";
 
 interface ClientsObject {
   id: number
@@ -32,7 +33,7 @@ const [clientData, setClientData] = useState<any>('')
 const [newClientList, setNewClientList] = useState<ClientsObject>('')
 const [clientInfo, setClientInfo] = useState<any>('')
 
-const { reset } = useForm<CreateClientFormData>({
+const { reset, setValue, control } = useForm<CreateClientFormData>({
   resolver: zodResolver(registerNewClientFormSchema)
 })
 
@@ -82,6 +83,22 @@ const { reset } = useForm<CreateClientFormData>({
     }
   } 
 
+  useEffect(() => {
+    if (clientInfo) {
+      setValue('name', clientInfo.name);
+      setValue('rg', clientInfo.rg);
+      setValue('cpf', clientInfo.cpf);
+      setValue('email', clientInfo.email);
+      setValue('cep', clientInfo.cep);
+      setValue('bairro', clientInfo.bairro);
+      setValue('rua', clientInfo.rua);
+      setValue('number', clientInfo.number);
+      setValue('city', clientInfo.city);
+      setValue('state', clientInfo.state);
+      setValue('country', clientInfo.country);
+    }
+  }, [clientInfo]);
+
   console.log(clientInfo)
 
   return (
@@ -101,10 +118,15 @@ const { reset } = useForm<CreateClientFormData>({
           }
         </div>
       </aside>
-      <div className="flex flex-col items-center p-4 w-2/3">
+      <div className="flex flex-col items-center p-4 w-2/3 text-black">
         {/* <div className="font-semibold text-2xl text-gray-600 mb-8">Cadastrar Novo Cliente</div> */}
         {/* <Form onSubmit={handleFormData} />            */}
-        <ClientInfo data={clientInfo} /> 
+        {/* <Controller
+          name="name"
+          control={control}
+          render={({ field }) => <input type="text" {...field} />}
+        /> */}
+        <EditForm clientData={clientInfo} onSubmit={handleFormData} />
       </div>
     </main>
   )

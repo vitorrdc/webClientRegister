@@ -83,6 +83,34 @@
       "state": "SP",
       "country": "Brasil",
       "id": 10
+    },
+    {
+      "name": "Lucas Módolo",
+      "rg": "65.465.465-4",
+      "cpf": "654.654.654-65",
+      "email": "vitor.camposrdc@gmail.com",
+      "cep": "65465-465",
+      "bairro": "Jardim das Palmeiras",
+      "rua": "José Melaré",
+      "number": "56",
+      "city": "Boituva",
+      "state": "SP",
+      "country": "Brasil",
+      "id": 11
+    },
+    {
+      "name": "Vitor Ribeiro",
+      "rg": "65.465.465-4",
+      "cpf": "654.654.654-65",
+      "email": "vitor.camposrdc@gmail.com",
+      "cep": "65464-654",
+      "bairro": "Jardim das Palmeiras",
+      "rua": "José Melaré",
+      "number": "56",
+      "city": "Boituva",
+      "state": "SP",
+      "country": "Brasil",
+      "id": 13
     }
   ]
 }
