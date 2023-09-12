@@ -126,7 +126,7 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
           control={control}
           render={({ field }) => <input type="text" {...field} />}
         /> */}
-        <EditForm clientData={clientInfo} onSubmit={handleFormData} />
+        <EditForm clientData={clientInfo} onSubmit={handleFormData} valueOfSet={setClientInfo} />
       </div>
     </main>
   )

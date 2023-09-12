@@ -64,7 +64,7 @@ export const registerNewClientFormSchema = z.object({
 
 export type CreateClientFormData = z.infer<typeof registerNewClientFormSchema >
 
-export function EditForm({onSubmit, clientData, setClientData}) {
+export function EditForm({onSubmit, clientData, valueOfSet}) {
 
   const { 
     register, 
@@ -88,7 +88,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className={clsx("w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm", {"border-red-500 border": errors.name})}
                   {...register('name')}
                   value={clientData.name}
-                  // onChange={(e) => setClientData({ ...clientData, name: e.target.value })}  
+                  onChange={(e) => valueOfSet({...clientData, name: e.target.value})}
                 />
                 {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
               </div>
@@ -99,6 +99,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
                   {...register('rg')}  
                   value={clientData.rg}
+                  onChange={(e) => valueOfSet({...clientData, rg: e.target.value})}
                 />
                 {errors.rg && <span className="text-red-500 text-xs">{errors.rg.message}</span>}
               </div>
@@ -109,6 +110,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
                   {...register('cpf')}  
                   value={clientData.cpf}
+                  onChange={(e) => valueOfSet({...clientData, cpf: e.target.value})}
                 />
                 {errors.cpf && <span className="text-red-500 text-xs">{errors.cpf.message}</span>}
               </div>
@@ -121,6 +123,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('email')} 
                   value={clientData.email}
+                  onChange={(e) => valueOfSet({...clientData, email: e.target.value})}
                 />
                 {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
               </div>
@@ -131,6 +134,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('cep')} 
                   value={clientData.cep}
+                  onChange={(e) => valueOfSet({...clientData, cep: e.target.value})}
                 />
                 {errors.cep && <span className="text-red-500 text-xs">{errors.cep.message}</span>}
               </div>
@@ -141,6 +145,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                   {...register('bairro')} 
                   value={clientData.bairro}
+                  onChange={(e) => valueOfSet({...clientData, bairro: e.target.value})}
                 />
                 {errors.bairro && <span className="text-red-500 text-xs">{errors.bairro.message}</span>}
               </div>
@@ -153,6 +158,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('rua')} 
                     value={clientData.rua}
+                    onChange={(e) => valueOfSet({...clientData, rua: e.target.value})}
                 />
                   {errors.rua && <span className="text-red-500 text-xs">{errors.rua.message}</span>}
               </div>
@@ -163,6 +169,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('number')} 
                     value={clientData.number}
+                    onChange={(e) => valueOfSet({...clientData, number: e.target.value})}
                 />
                   {errors.number && <span className="text-red-500 text-xs">{errors.number.message}</span>}
               </div>
@@ -173,6 +180,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('city')} 
                     value={clientData.city}
+                    onChange={(e) => valueOfSet({...clientData, city: e.target.value})}
                 />
                   {errors.city && <span className="text-red-500 text-xs">{errors.city.message}</span>}
               </div>
@@ -183,6 +191,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('state')} 
                     value={clientData.state}
+                    onChange={(e) => valueOfSet({...clientData, state: e.target.value})}
                 />
                   {errors.state && <span className="text-red-500 text-xs">{errors.state.message}</span>}
               </div>
@@ -193,6 +202,7 @@ export function EditForm({onSubmit, clientData, setClientData}) {
                   className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('country')} 
                     value={clientData.country}
+                    onChange={(e) => valueOfSet({...clientData, country: e.target.value})}
                 />
                   {errors.country && <span className="text-red-500 text-xs">{errors.country.message}</span>}
               </div>
