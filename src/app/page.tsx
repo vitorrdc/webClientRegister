@@ -50,7 +50,7 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
   
   useEffect(() => {
     fetchClients()
-  },[newClientList])
+  },[newClientList, clientData])
 
   async function handleFormData(data: any) {
    const form = data
@@ -63,6 +63,18 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
     console.log(error)
    } 
   }
+
+  async function handleFormData(data: any) {
+    const form = data
+    try {
+     const response = await axios.post('http://localhost:3001/posts', form )
+     const newClient = response.data
+     setNewClientList(newClient)
+     reset()
+   } catch (error) {
+     console.log(error)
+    } 
+   }
 
   async function handleDeleteClient(id) {
     try {
@@ -83,6 +95,26 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
     }
   } 
 
+  async function handleUpdateData(id) {
+    try {
+      const response = await axios.put(`http://localhost:3001/posts/${id}`, clientInfo)
+      console.log(response)
+      const updateClientData = clientData.map(client => {
+        if (client.id === id) {
+          return {
+            ...client,
+            clientInfo
+          }
+        } else {
+          return client
+        }
+      })
+      setClientData(updateClientData)
+    } catch (error) {
+      window.alert(error)
+    }
+  }
+
   useEffect(() => {
     if (clientInfo) {
       setValue('name', clientInfo.name);
@@ -99,7 +131,7 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
     }
   }, [clientInfo]);
 
-  console.log(clientInfo)
+  // console.log(clientInfo)
 
   return (
     <main className="w-screen h-screen flex flex-row">
@@ -126,7 +158,7 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
           control={control}
           render={({ field }) => <input type="text" {...field} />}
         /> */}
-        <EditForm clientData={clientInfo} onSubmit={handleFormData} valueOfSet={setClientInfo} />
+        <EditForm clientData={clientInfo} onSubmit={() => handleUpdateData(clientInfo.id)} valueOfSet={setClientInfo} />
       </div>
     </main>
   )

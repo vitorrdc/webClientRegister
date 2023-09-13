@@ -77,7 +77,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
 
   return (
     <form 
-            className="flex flex-col gap-4 mt-12 w-full"
+            className="flex flex-col gap-4 mt-12 w-full bg-white p-4 rounded-md"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex flex-row items-center justify-around gap-1 w-full">
