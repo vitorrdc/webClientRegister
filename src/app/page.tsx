@@ -32,6 +32,9 @@ const [selectedImage, setSelectedImage] = useState(null);
 const [clientData, setClientData] = useState<any>('')
 const [newClientList, setNewClientList] = useState<ClientsObject>('')
 const [clientInfo, setClientInfo] = useState<any>('')
+const [openNewClientForm, setOpenNewClientForm] = useState<boolean>(false)
+const [openEditClientForm, setOpenEditClientForm] = useState<boolean>(false)
+const [shouldFetchClients, setShouldFetchClients] = useState(true);
 
 const { reset, setValue, control } = useForm<CreateClientFormData>({
   resolver: zodResolver(registerNewClientFormSchema)
@@ -49,8 +52,11 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
 
   
   useEffect(() => {
-    fetchClients()
-  },[newClientList, clientData])
+    if (shouldFetchClients) {
+      fetchClients();
+      setShouldFetchClients(false); // Evite futuras chamadas desnecessárias
+    }
+  },[shouldFetchClients])
 
   async function handleFormData(data: any) {
    const form = data
@@ -64,17 +70,17 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
    } 
   }
 
-  async function handleFormData(data: any) {
-    const form = data
-    try {
-     const response = await axios.post('http://localhost:3001/posts', form )
-     const newClient = response.data
-     setNewClientList(newClient)
-     reset()
-   } catch (error) {
-     console.log(error)
-    } 
-   }
+  // async function handleFormData(data: any) {
+  //   const form = data
+  //   try {
+  //    const response = await axios.post('http://localhost:3001/posts', form )
+  //    const newClient = response.data
+  //    setNewClientList(newClient)
+  //    reset()
+  //  } catch (error) {
+  //    console.log(error)
+  //   } 
+  //  }
 
   async function handleDeleteClient(id) {
     try {
@@ -98,7 +104,6 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
   async function handleUpdateData(id) {
     try {
       const response = await axios.put(`http://localhost:3001/posts/${id}`, clientInfo)
-      console.log(response)
       const updateClientData = clientData.map(client => {
         if (client.id === id) {
           return {
@@ -110,6 +115,7 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
         }
       })
       setClientData(updateClientData)
+      setShouldFetchClients(true); // Permite buscar clientes novamente
     } catch (error) {
       window.alert(error)
     }
@@ -131,12 +137,27 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
     }
   }, [clientInfo]);
 
+  function handleOpenNewClientWindow() {
+    setOpenNewClientForm(true)
+    setOpenEditClientForm(false)
+  }
+
+  function handleOpenEditClientWindow() {
+    setOpenNewClientForm(false)
+    setOpenEditClientForm(true)
+  }
+
   // console.log(clientInfo)
 
   return (
     <main className="w-screen h-screen flex flex-row">
       <aside className=" bg-white w-1/3 h-screen border border-black overflow-y-scroll flex flex-col items-center px-2 py-4">
-        <div className="font-semibold text-2xl text-gray-600 mb-8">Meus Clientes</div>   
+        <div className="font-semibold text-2xl text-gray-600 mb-2">Meus Clientes</div> 
+        <div className="w-full flex justify-end mb-2">
+          <button className="flex-end" onClick={handleOpenNewClientWindow}>
+            <img src="/image/addClient.png" alt="" width={40} height={40}/>
+          </button> 
+        </div> 
         <div className="w-full h-64">
           {
            clientData && clientData.map((element) => {
@@ -151,9 +172,9 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
         </div>
       </aside>
       <div className="flex flex-col items-center p-4 w-2/3 text-black">
-        {/* <div className="font-semibold text-2xl text-gray-600 mb-8">Cadastrar Novo Cliente</div> */}
+        {/* <div className="font-semibold text-2xl text-gray-600 mb-8">Cadastrar Novo Cliente</div>  */}
         {/* <Form onSubmit={handleFormData} />            */}
-        {/* <Controller
+        {/* { <Controller
           name="name"
           control={control}
           render={({ field }) => <input type="text" {...field} />}

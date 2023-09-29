@@ -80,6 +80,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
             className="flex flex-col gap-4 mt-12 w-full bg-white p-4 rounded-md"
             onSubmit={handleSubmit(onSubmit)}
           >
+            <div className="text-gray-700 font-semibold">Informações do cliente</div>
             <div className="flex flex-row items-center justify-around gap-1 w-full">
               <div className="flex flex-col justify-center w-full mr-4">
                 <label htmlFor="name" className="text-gray-600 text-sm font-semibold ml-2">Nome</label>
@@ -211,7 +212,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
               type="submit"
               className="bg-emerald-500 text-white rounded-md py-1 shadow-md mt-48"
             >
-              Salvar
+              Salvar alterações 
             </button>
           </form>
   )

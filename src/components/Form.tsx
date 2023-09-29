@@ -77,9 +77,10 @@ export function Form({onSubmit}) {
 
   return (
     <form 
-            className="flex flex-col gap-4 mt-12 w-full"
+            className="flex flex-col gap-4 mt-12 w-full bg-white p-2 rounded-md"
             onSubmit={handleSubmit(onSubmit)}
           >
+            <div className="font-semibold text-lg text-gray-600 mb-8">Cadastrar novo cliente</div>
             <div className="flex flex-row items-center justify-around gap-1 w-full">
               <div className="flex flex-col justify-center w-full mr-4">
                 <label htmlFor="name" className="text-gray-600 text-sm font-semibold ml-2">Nome</label>
