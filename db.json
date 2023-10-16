@@ -1,20 +1,6 @@
 {
   "posts": [
     {
-      "name": "Lorraine",
-      "rg": "65.465.465-4",
-      "cpf": "654.654.654-65",
-      "email": "vitor.camposrdc@gmail.com",
-      "cep": "65464-654",
-      "bairro": "Tristão Rosa",
-      "rua": "José Melaré",
-      "number": "56",
-      "city": "Boituva",
-      "state": "SP",
-      "country": "Brasil",
-      "id": 1
-    },
-    {
       "name": "Lucas Eduardoadasdas",
       "rg": "65.465.456-4",
       "cpf": "654.654.654-65",
@@ -43,13 +29,13 @@
       "id": 5
     },
     {
-      "name": "Vitória Ribewiro",
+      "name": "Celestino Almeida",
       "rg": "65.465.465-4",
       "cpf": "654.654.654-65",
       "email": "vitor.camposrdc@gmail.com",
       "cep": "65464-654",
       "bairro": "Jardim das Palmeiras",
-      "rua": "Thomas de Aquino",
+      "rua": "Arlequino Dias",
       "number": "56",
       "city": "Boituva",
       "state": "SP",
