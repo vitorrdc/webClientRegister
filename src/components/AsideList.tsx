@@ -1,7 +1,15 @@
 import { ClientItem } from "./ClientItem"
 import { EmpityClientList } from "./EmpityClientList"
+import { ClientsObject } from "@/app/page"
 
-export function AsideClientList({handleOpenNewClientWindow, clientData, handleDeleteClient, handleClientInfo}) {
+interface AsideClientListProps {
+  handleOpenNewClientWindow: () => void
+  clientData: ClientsObject[]
+  handleDeleteClient: (id: number) => void
+  handleClientInfo: (id: number) => void
+}
+
+export function AsideClientList({handleOpenNewClientWindow, clientData, handleDeleteClient, handleClientInfo}: AsideClientListProps) {
   return (
     <aside className=" bg-white w-1/3 h-screen border border-black overflow-y-scroll flex flex-col    items-center px-2 py-4">
         <div className="font-semibold text-2xl text-gray-600 mb-2">Meus Clientes</div> 

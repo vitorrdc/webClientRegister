@@ -87,7 +87,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="name" className="text-gray-600 text-sm font-semibold ml-2">Nome</label>
                   <input 
                     type="text" 
-                    className={clsx("w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm", {"border-red-500 border": errors.name})}
+                    className={clsx("w-full border-cyan-500 border bg-blue-100 rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm", {"border-red-500 border": errors.name})}
                     {...register('name')}
                     value={clientData.name}
                     onChange={(e) => valueOfSet({...clientData, name: e.target.value})}
@@ -98,7 +98,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="rg" className="text-gray-600 text-sm font-semibold ml-2">RG</label>
                   <InputMask
                     mask='99.999.999-9'
-                    className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
+                    className="w-full border-cyan-500 border bg-blue-100 rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
                     {...register('rg')}  
                     value={clientData.rg}
                     onChange={(e) => valueOfSet({...clientData, rg: e.target.value})}
@@ -109,7 +109,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="cpf" className="text-gray-600 text-sm font-semibold ml-2">CPF</label>
                   <InputMask
                     mask='999.999.999-99'
-                    className="w-full border-cyan-500 border bg-white rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
+                    className="w-full border-cyan-500 border bg-blue-100 rounded-md shadow-sm px-2 py-1 text-gray-700 text-sm"
                     {...register('cpf')}  
                     value={clientData.cpf}
                     onChange={(e) => valueOfSet({...clientData, cpf: e.target.value})}
@@ -122,7 +122,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="email" className="text-zinc-700 text-sm font-semibold ml-2">E-mail</label>
                   <input 
                     type="text"  
-                    className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className=" w-full border bg-blue-100 border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('email')} 
                     value={clientData.email}
                     onChange={(e) => valueOfSet({...clientData, email: e.target.value})}
@@ -133,7 +133,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="cep" className="text-zinc-700 text-sm font-semibold ml-2">CEP</label>
                   <InputMask 
                     mask='99999-999' 
-                    className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className="border border-cyan-500 bg-blue-100 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('cep')} 
                     value={clientData.cep}
                     onChange={(e) => valueOfSet({...clientData, cep: e.target.value})}
@@ -144,7 +144,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="bairro" className="text-zinc-700 text-sm font-semibold ml-2">Bairro</label>
                   <input 
                     type="text" 
-                    className="border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className="border border-cyan-500 bg-blue-100 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                     {...register('bairro')} 
                     value={clientData.bairro}
                     onChange={(e) => valueOfSet({...clientData, bairro: e.target.value})}
@@ -157,7 +157,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="rua" className="text-zinc-700 text-sm font-semibold ml-2">Rua</label>
                   <input 
                     type="text" 
-                    className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className=" w-full border border-cyan-500 bg-blue-100 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                       {...register('rua')} 
                       value={clientData.rua}
                       onChange={(e) => valueOfSet({...clientData, rua: e.target.value})}
@@ -168,7 +168,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="number" className="text-zinc-700 text-sm font-semibold ml-2">nº</label>
                   <input 
                     type="text" 
-                    className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className=" w-full border border-cyan-500 bg-blue-100 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                       {...register('number')} 
                       value={clientData.number}
                       onChange={(e) => valueOfSet({...clientData, number: e.target.value})}
@@ -179,7 +179,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="city" className="text-zinc-700 text-sm font-semibold ml-2">Cidade</label>
                   <input 
                     type="text" 
-                    className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className=" w-full border border-cyan-500 bg-blue-100 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                       {...register('city')} 
                       value={clientData.city}
                       onChange={(e) => valueOfSet({...clientData, city: e.target.value})}
@@ -190,7 +190,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="state" className="text-zinc-700 text-sm font-semibold ml-2">UF</label>
                   <input 
                     type="text" 
-                    className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className=" w-full border border-cyan-500 bg-blue-100 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                       {...register('state')} 
                       value={clientData.state}
                       onChange={(e) => valueOfSet({...clientData, state: e.target.value})}
@@ -201,7 +201,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
                   <label htmlFor="country" className="text-zinc-700 text-sm font-semibold ml-2">País</label>
                   <input 
                     type="text" 
-                    className=" w-full border border-cyan-500 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
+                    className=" w-full border border-cyan-500 bg-blue-100 rounded-md px-2 py-1 text-gray-700 text-sm shadow-md"
                       {...register('country')} 
                       value={clientData.country}
                       onChange={(e) => valueOfSet({...clientData, country: e.target.value})}
@@ -211,7 +211,7 @@ export function EditForm({onSubmit, clientData, valueOfSet}) {
               </div>
               <button 
                 type="submit"
-                className="bg-emerald-500 text-white rounded-md py-1 shadow-md mt-48"
+                className="bg-emerald-500 text-white rounded-md py-1 shadow-md mt-12"
               >
                 Salvar alterações 
               </button>

@@ -1,18 +1,13 @@
 'use client'
-import { ClientItem } from "@/components/ClientItem"
 import { useEffect, useState } from "react"
-import { SelectClientType } from "@/components/SelectClientType";
 import axios from "axios";
-import { InputAvatar } from "@/components/InputAvatar";
-import { EmpityClientList } from "@/components/EmpityClientList";
 import { CreateClientFormData, Form, registerNewClientFormSchema } from "@/components/Form";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClientInfo } from "@/components/ClientInfo";
 import { EditForm } from "@/components/EditForm";
 import { AsideClientList } from "@/components/AsideList";
 
-interface ClientsObject {
+export interface ClientsObject {
   id: number
   name: string
   rg: string
@@ -29,15 +24,14 @@ interface ClientsObject {
 
 export default function Home() {
 
-const [selectedImage, setSelectedImage] = useState(null);
 const [clientData, setClientData] = useState<any>('')
-const [newClientList, setNewClientList] = useState<ClientsObject>('')
+const [newClientList, setNewClientList] = useState<ClientsObject>()
 const [clientInfo, setClientInfo] = useState<any>('')
-const [openNewClientForm, setOpenNewClientForm] = useState<boolean>(false)
-const [openEditClientForm, setOpenEditClientForm] = useState<boolean>(false)
+const [openNewClientForm, setOpenNewClientForm] = useState<boolean>(true)
+const [openEditClientForm, setOpenEditClientForm] = useState<boolean>(true)
 const [shouldFetchClients, setShouldFetchClients] = useState(true);
 
-const { reset, setValue, control } = useForm<CreateClientFormData>({
+const { reset, setValue} = useForm<CreateClientFormData>({
   resolver: zodResolver(registerNewClientFormSchema)
 })
 
@@ -51,7 +45,6 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
     }
   }
 
-  
   useEffect(() => {
     if (shouldFetchClients) {
       fetchClients();
@@ -59,53 +52,42 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
     }
   },[shouldFetchClients])
 
-  async function handleFormData(data: any) {
-   const form = data
-   try {
-    const response = await axios.post('http://localhost:3001/posts', form )
-    const newClient = response.data
-    setNewClientList(newClient)
-    reset()
-  } catch (error) {
-    console.log(error)
-   } 
-  }
+  async function handleFormData(data: ClientsObject) {
+    const form = data
+    try {
+     const response = await axios.post('http://localhost:3001/posts', form )
+     const newClient = response.data
+     setNewClientList(newClient)
+     setClientData([...clientData, newClient])
+   } catch (error) {
+     console.log(error)
+    } 
+   }
 
-  // async function handleFormData(data: any) {
-  //   const form = data
-  //   try {
-  //    const response = await axios.post('http://localhost:3001/posts', form )
-  //    const newClient = response.data
-  //    setNewClientList(newClient)
-  //    reset()
-  //  } catch (error) {
-  //    console.log(error)
-  //   } 
-  //  }
-
-  async function handleDeleteClient(id) {
+  async function handleDeleteClient(id: number) {
     try {
       const response = await axios.delete(`http://localhost:3001/posts/${id}`)
-      const updateList = clientData.filter((element) => element.id !== id)
+      const updateList = clientData.filter((element: ClientsObject) => element.id !== id)
       setClientData(updateList)
     } catch (error) {
       window.alert(error)
     }
   }
   
-  async function handleClientInfo(id) {
+  async function handleClientInfo(id: number) {
     try {
       const response = await axios.get(`http://localhost:3001/posts/${id}`)
       setClientInfo(response.data)
     } catch (error) {
       window.alert(error)
     }
+    setOpenNewClientForm(false)
   } 
 
-  async function handleUpdateData(id) {
+  async function handleUpdateData(id: number) {
     try {
       const response = await axios.put(`http://localhost:3001/posts/${id}`, clientInfo)
-      const updateClientData = clientData.map(client => {
+      const updateClientData = clientData.map((client: ClientsObject) => {
         if (client.id === id) {
           return {
             ...client,
@@ -116,7 +98,7 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
         }
       })
       setClientData(updateClientData)
-      setShouldFetchClients(true); // Permite buscar clientes novamente
+      setShouldFetchClients(true) // Permite buscar clientes novamente
     } catch (error) {
       window.alert(error)
     }
@@ -140,7 +122,6 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
 
   function handleOpenNewClientWindow() {
     setOpenNewClientForm(true)
-    setOpenEditClientForm(false)
   }
 
   function handleOpenEditClientWindow() {
@@ -148,12 +129,13 @@ const { reset, setValue, control } = useForm<CreateClientFormData>({
     setOpenEditClientForm(true)
   }
 
-  console.log(clientInfo)
-
+console.log()
   return (
     <main className="w-screen h-screen flex flex-row">
       <AsideClientList clientData={clientData} handleClientInfo={handleClientInfo} handleDeleteClient={handleDeleteClient} handleOpenNewClientWindow={handleOpenNewClientWindow}  />
-      <EditForm clientData={clientInfo} onSubmit={() => handleUpdateData(clientInfo.id)} valueOfSet={setClientInfo} />
+        {
+          openNewClientForm ? <Form onSubmit={handleFormData} /> : <EditForm clientData={clientInfo} onSubmit={() => handleUpdateData(clientInfo.id)} valueOfSet={setClientInfo} />
+        }         
     </main>
   )
 }
