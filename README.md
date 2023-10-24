@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projeto para Cadastro de Clientes
 
-## Getting Started
+<h1 align="center">
+  <img alt="Banda Avitas" title="Shot Game" src="./public/image/banner.png" />
+</h1>
 
-First, run the development server:
+> Projeto desenvolvido utilizando json-server como db para a prática de consumo de API (CRUD). A aplicação provê o cadastro de clientes, possibilitando posteriormente a edição das informações inseridas através de um formulário desenvolvido com a biblioteca React Hook Forms. Os campos do formulário possuem forte validação e também máscaras para garantir que as informações sejam enviadas corretamente.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+* Você tem uma máquina `<Windows / Linux / Mac>`.
+* Você tem o [git](https://git-scm.com) instalado na sua máquina.
+* Você tem o [node](https://nodejs.org/en/) instalado na sua máquina.
+
+## 🚀 Para visualizar
+
+bash:
+```
+# Clone este repositório
+$ git clone <https://github.com/vitorrdc/webClientRegister>
+# Acesse a pasta do projeto no terminal/cmd
+$ cd webClientRegister
+# Instale as dependências
+$ npm install ou yarn install
+# Acesse a pasta do projeto no terminal/cmd
+$ cd webClientRegister
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev ou yarn dev
+# O servidor inciará na porta:3000
+# Instale o json-server para usufruir do banco de dados
+# Execute o mesmo na porta:3001
+# Agora é só acessar o endereço http://localhost:3000 no Browser de sua preferência
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🛠 Tecnologias
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+As seguintes ferramentas foram usadas na construção do projeto:
+- [NextJS](https://nextjs.org/)
+- [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Json-Server](https://www.npmjs.com/package/json-server)
+- [React-Hook-Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 👨🏾‍💻 Autor
+---
 
-## Learn More
+ <img style="border-radius: 50%;" src="https://github.com/vitorrdc.png" width="100px;" alt=""/>
 
-To learn more about Next.js, take a look at the following resources:
+Feito com ❤️ por Vitor Ribeiro 👋🏽 Entre em contato!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[![Gmail Badge](https://img.shields.io/badge/-vitor.camposrdc@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:vitor.camposrdc@gmail.com)](mailto:vitor.camposrdc@gmail.com)
