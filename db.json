@@ -111,20 +111,6 @@
       "state": "SP",
       "country": "Brasil",
       "id": 19
-    },
-    {
-      "name": "Camargo Dias",
-      "rg": "44.654.654-6",
-      "cpf": "654.654.654-65",
-      "email": "camargo@camargo.com",
-      "cep": "65464-654",
-      "bairro": "Todos",
-      "rua": "Alameda FLores",
-      "number": "56",
-      "city": "Boituva",
-      "state": "SP",
-      "country": "Brasil",
-      "id": 20
     }
   ]
 }

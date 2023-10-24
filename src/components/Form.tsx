@@ -1,8 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import InputMask from 'react-input-mask';
+import { ClientsObject } from "@/app/page"
 
 export const registerNewClientFormSchema = z.object({
   name: z.string()
@@ -65,7 +66,7 @@ export const registerNewClientFormSchema = z.object({
 export type CreateClientFormData = z.infer<typeof registerNewClientFormSchema >
 
 interface onSubmitProps {
-  onSubmit: () => void
+  onSubmit: SubmitHandler<ClientsObject>
 }
 
 export function Form({onSubmit}: onSubmitProps) {

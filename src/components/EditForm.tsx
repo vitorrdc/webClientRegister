@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import InputMask from 'react-input-mask';
 
@@ -64,7 +64,13 @@ export const registerNewClientFormSchema = z.object({
 
 export type CreateClientFormData = z.infer<typeof registerNewClientFormSchema >
 
-export function EditForm({onSubmit, clientData, valueOfSet}) {
+interface EditFormProps {
+  onSubmit: SubmitHandler<CreateClientFormData>
+  clientData: CreateClientFormData
+  valueOfSet: any
+}
+
+export function EditForm({onSubmit, clientData, valueOfSet}: EditFormProps) {
 
   const { 
     register, 

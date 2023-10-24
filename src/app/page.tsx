@@ -124,12 +124,6 @@ const { reset, setValue} = useForm<CreateClientFormData>({
     setOpenNewClientForm(true)
   }
 
-  function handleOpenEditClientWindow() {
-    setOpenNewClientForm(false)
-    setOpenEditClientForm(true)
-  }
-
-console.log()
   return (
     <main className="w-screen h-screen flex flex-row">
       <AsideClientList clientData={clientData} handleClientInfo={handleClientInfo} handleDeleteClient={handleDeleteClient} handleOpenNewClientWindow={handleOpenNewClientWindow}  />
